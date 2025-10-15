@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CleanTech - Recyclage Intelligent</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/public/css/m.css" />
+</head>
+<style>
+:root {
+--primary: #10b981;--primary-dark: #059669;
+--primary-light: #d1fae5;
+--secondary: #3b82f6;
+--secondary-dark: #2563eb;
+--accent: #f59e0b;
+--dark: #1f2937;
+--light: #f9fafb;
+}
+.dashboard-card {
+background: white;
+border-radius: 15px;
+box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+transition: all 0.3s ease;
+border: none;
+overflow: hidden;
+}
+.dashboard-card:hover {
+transform: translateY(-5px);
+box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+}
+.stat-card {
+background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+color: white;
+border-radius: 15px;
+padding: 1.5rem;
+}
+.nav-pills-custom .nav-link {
+border-radius: 10px;
+margin: 0.2rem 0;
+transition: all 0.3s ease;
+}
+.nav-pills-custom .nav-link.active {
+background: var(--primary);
+color: white;
+}
+</style>
+</head>
+<body>
+
+  <%- include('../partials/navbar', { user }) %>
+  <main>
+    <!-- Hero Section -->
+<section class="hero">
+  <div class="container">
+    <div class="row align-items-center">
+      <!-- Colonne gauche -->
+      <div class="col-lg-6 hero-content">
+        <!-- Badge avec ton logo -->
+        <div class="hero-badge d-flex align-items-center gap-2">
+          <img src="/public/img/logo.png" alt="Logo CleanTech" style="height:50px;">
+          <span>Rejoignez la révolution écologique</span>
+        </div>
+
+        <h1>Recyclez Intelligemment, Gagnez Réellement</h1>
+        <p>CleanTech transforme vos déchets en récompenses tangibles. Rejoignez notre communauté engagée pour un avenir plus durable.</p>
+
+        <div class="d-flex flex-wrap gap-3 mb-4">
+          <a href="/users/dashboard" class="btn btn-primary"><i class="fas fa-play me-2"></i>Commencer maintenant</a>
+          <a href="#process" class="btn btn-outline-primary"><i class="fas fa-info-circle me-2"></i>En savoir plus</a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat">
+            <span class="stat-number">5,000+</span>
+            <div class="stat-label">Utilisateurs actifs</div>
+          </div>
+          <div class="stat">
+            <span class="stat-number">120T</span>
+            <div class="stat-label">Déchets recyclés</div>
+          </div>
+          <div class="stat">
+            <span class="stat-number">15,000€</span>
+            <div class="stat-label">Récompenses distribuées</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Colonne droite -->
+      <div class="col-lg-6 hero-image">
+        <div class="floating-shapes">
+          <div class="shape shape-1"></div>
+          <div class="shape shape-2"></div>
+          <div class="shape shape-3"></div>
+        </div>
+        <div class="phone-mockup">
+          <div class="phone-screen">
+            <div class="app-icon"><i class="fas fa-recycle"></i></div>
+            <h3>CleanTech</h3>
+            <p>Recyclage Récompensé</p>
+            <div class="mt-4 text-start">
+              <div class="d-flex align-items-center mb-2"><i class="fas fa-check-circle me-2"></i><span>Gagnez des points</span></div>
+              <div class="d-flex align-items-center mb-2"><i class="fas fa-check-circle me-2"></i><span>Suivez votre impact</span></div>
+              <div class="d-flex align-items-center"><i class="fas fa-check-circle me-2"></i><span>Échangez vos récompenses</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Process Section -->
+<section id="process" class="fade-in">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-badge"><i class="fas fa-cogs"></i> Simple et Efficace</div>
+      <h2 class="section-title">Comment ça marche</h2>
+      <p class="section-subtitle">En 4 étapes simples, transformez vos déchets en récompenses et contribuez à un environnement plus propre</p>
+    </div>
+    <div class="row">
+      <div class="col-lg-3 col-md-6 mb-4"><div class="process-step"><div class="step-number">1</div><h4>Inscription</h4><p>Téléchargez l'application et créez votre compte en 2 minutes.</p></div></div>
+      <div class="col-lg-3 col-md-6 mb-4"><div class="process-step"><div class="step-number">2</div><h4>Tri et Dépôt</h4><p>Apportez vos déchets triés à l'un de nos points de collecte.</p></div></div>
+      <div class="col-lg-3 col-md-6 mb-4"><div class="process-step"><div class="step-number">3</div><h4>Scan et Points</h4><p>Scannez votre code et recevez vos points instantanément.</p></div></div>
+      <div class="col-lg-3 col-md-6 mb-4"><div class="process-step"><div class="step-number">4</div><h4>Récompenses</h4><p>Échangez vos points contre des cadeaux écologiques.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section id="features" class="features-section fade-in">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-badge"><i class="fas fa-star"></i> Avantages Exclusifs</div>
+      <h2 class="section-title">Pourquoi Choisir CleanTech</h2>
+      <p class="section-subtitle">Découvrez les avantages qui font de CleanTech la solution de recyclage la plus innovante</p>
+    </div>
+    <div class="row">
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+          <h4>Gain de Temps</h4>
+          <p>Notre processus optimisé vous fait gagner du temps à chaque dépôt avec une expérience utilisateur fluide.</p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+          <h4>Impact Mesurable</h4>
+          <p>Suivez en temps réel votre contribution à la protection de l'environnement avec des statistiques détaillées.</p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-gift"></i></div>
+          <h4>Récompenses Variées</h4>
+          <p>Choisissez parmi des centaines de récompenses adaptées à vos envies et à vos valeurs écologiques.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Waste Types -->
+<section id="waste-types" class="fade-in">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-badge"><i class="fas fa-recycle"></i> Valorisation Maximale</div>
+      <h2 class="section-title">Déchets Acceptés</h2>
+      <p class="section-subtitle">Nous valorisons une large gamme de matériaux pour un recyclage optimal et responsable</p>
+    </div>
+    <div class="row text-center">
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="waste-type">
+          <div class="waste-icon"><i class="fas fa-wine-bottle"></i></div>
+          <h5>Plastique</h5>
+          <p>Bouteilles, emballages, contenants de toutes sortes et tous types de plastique recyclable.</p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="waste-type">
+          <div class="waste-icon"><i class="fas fa-glass-martini-alt"></i></div>
+          <h5>Verre</h5>
+          <p>Bouteilles, pots, bocaux et autres produits en verre transparent ou coloré.</p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="waste-type">
+          <div class="waste-icon"><i class="fas fa-cube"></i></div>
+          <h5>Métal</h5>
+          <p>Canettes, boîtes de conserve, produits métalliques et objets en aluminium.</p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="waste-type">
+          <div class="waste-icon"><i class="fas fa-laptop"></i></div>
+          <h5>Électronique</h5>
+          <p>Petits appareils, câbles, batteries, composants et déchets électroniques.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Rewards Section (dynamique) -->
+<section id="rewards" class="rewards-section fade-in">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title" style="color:white;">Récompenses Attractives</h2>
+      <p class="section-subtitle" style="color:rgba(255,255,255,0.8);">Échangez vos points contre des récompenses qui ont du sens</p>
+    </div>
+    <div class="row">
+      <% if (rewards && rewards.length) { rewards.forEach(r => { %>
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="reward-card">
+            <div class="reward-icon"><i class="fas fa-gift"></i></div>
+            <h4><%= r.name %></h4>
+            <p><%= r.description || '' %></p>
+            <div class="reward-badge">À partir de <%= r.points_required %> points</div>
+          </div>
+        </div>
+      <% }) } else { %>
+        <div class="col-lg-4 col-md-6 mb-4"><div class="reward-card"><div class="reward-icon"><i class="fas fa-shopping-bag"></i></div><h4>Bons d'achat</h4><p>Réductions chez des enseignes locales écoresponsables.</p><div class="reward-badge">À partir de 500 points</div></div></div>
+        <div class="col-lg-4 col-md-6 mb-4"><div class="reward-card"><div class="reward-icon"><i class="fas fa-seedling"></i></div><h4>Plantes écologiques</h4><p>Embellissez votre intérieur, purifiez l'air.</p><div class="reward-badge">À partir de 300 points</div></div></div>
+        <div class="col-lg-4 col-md-6 mb-4"><div class="reward-card"><div class="reward-icon"><i class="fas fa-trophy"></i></div><h4>Produits durables</h4><p>Sélection respectueuse de l'environnement.</p><div class="reward-badge">À partir de 700 points</div></div></div>
+      <% } %>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section id="testimonials" class="testimonials-section fade-in">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-badge"><i class="fas fa-comments"></i> Ils parlent de nous</div>
+      <h2 class="section-title">Témoignages</h2>
+      <p class="section-subtitle">Découvrez comment CleanTech a changé le quotidien de nos utilisateurs</p>
+    </div>
+    <div class="row">
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="testimonial-card">
+          <div class="testimonial-content">
+            <div class="d-flex align-items-center mb-3">
+              <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Marie" class="testimonial-avatar">
+              <div><h5 class="mb-0">Marie L.</h5><small>Utilisatrice depuis 6 mois</small></div>
+            </div>
+            <p class="mb-0">"CleanTech a radicalement changé ma façon de voir le recyclage. Non seulement je contribue à préserver l'environnement, mais en plus je gagne des récompenses utiles !"</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="testimonial-card">
+          <div class="testimonial-content">
+            <div class="d-flex align-items-center mb-3">
+              <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Pierre" class="testimonial-avatar">
+              <div><h5 class="mb-0">Pierre D.</h5><small>Utilisateur depuis 1 an</small></div>
+            </div>
+            <p class="mb-0">"J'ai déjà économisé plus de 100€ grâce aux bons d'achat. Les défis communautaires ajoutent une dimension ludique très appréciée par mes enfants."</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="testimonial-card">
+          <div class="testimonial-content">
+            <div class="d-flex align-items-center mb-3">
+              <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Sophie" class="testimonial-avatar">
+              <div><h5 class="mb-0">Sophie K.</h5><small>Utilisatrice depuis 3 mois</small></div>
+            </div>
+            <p class="mb-0">"En tant qu'enseignante, j'utilise CleanTech pour sensibiliser mes élèves à l'écologie. C'est un excellent outil pédagogique."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section fade-in">
+  <div class="container">
+    <div class="cta-content">
+      <h2 class="mb-4">Prêt à rejoindre la révolution CleanTech ?</h2>
+      <p class="lead mb-5">Inscrivez-vous dès maintenant et commencez à transformer vos déchets en récompenses.</p>
+      <div class="d-flex flex-wrap justify-content-center gap-3">
+        <a href="#" class="btn btn-light btn-lg" data-bs-toggle="modal" data-bs-target="#registerModal"><i class="fas fa-user-plus me-2"></i>Créer un compte gratuit</a>
+        <a href="#" class="btn btn-outline-light btn-lg" data-bs-toggle="modal" data-bs-target="#loginModal"><i class="fas fa-sign-in-alt me-2"></i>Se connecter</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </main>
+  <%- include('../partials/footer') %>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/public/js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+(function(){
+  const p = new URLSearchParams(window.location.search);
+  const s = p.get('success'); const e = p.get('error');
+  if (s) Swal.fire({ icon: 'success', title: 'Succès', text: s, confirmButtonColor: '#10b981' });
+  if (e) Swal.fire({ icon: 'error', title: 'Erreur', text: e, confirmButtonColor: '#ef4444' });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CleanTech - Recyclage Intelligent</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/public/css/m.css" />
+</head>
+<style>
+:root {
+--primary: #10b981;--primary-dark: #059669;
+--primary-light: #d1fae5;
+--secondary: #3b82f6;
+--secondary-dark: #2563eb;
+--accent: #f59e0b;
+--dark: #1f2937;
+--light: #f9fafb;
+}
+.dashboard-card {
+background: white;
+border-radius: 15px;
+box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+transition: all 0.3s ease;
+border: none;
+overflow: hidden;
+}
+.dashboard-card:hover {
+transform: translateY(-5px);
+box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+}
+.stat-card {
+background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+color: white;
+border-radius: 15px;
+padding: 1.5rem;
+}
+.nav-pills-custom .nav-link {
+border-radius: 10px;
+margin: 0.2rem 0;
+transition: all 0.3s ease;
+}
+.nav-pills-custom .nav-link.active {
+background: var(--primary);
+color: white;
+}
+</style>
+</head>
+<body>
+
+<%- include('../partials/navbar', { user}) %>
+  <br><br>
+  <main style="padding-top: 80px;">
+<div class="container py-5">
+<div class="row justify-content-center">
+<div class="col-lg-10">
+<div class="text-center mb-5">
+<h1 class="h2 fw-bold text-dark mb-3">
+💳 Abonnement <%
+= user.role === 'partner' ? 'Partenaire' : 'Investisseur' %></h1
+>
+<p class="text-muted lead">Choisissez la formule qui c
+orrespond à vos besoins</p>
+</div>
+<div class="row">
+<!-- Formule Mensuelle -->
+<div class="col-md-6 mb-4">
+<div class="dashboard-card p-4 h-100 text-center position-relative">
+<div class="position-absolute top-0 start-50 trans
+late-middle">
+<span class="badge bg-primary rounded-pill px-3
+py-2">Populaire</span>
+</div>
+<div class="py-4">
+<h4 class="fw-bold text-primary mb-3">Mensuel</h
+4>
+<div class="price display-3 fw-bold text-dark mb
+-3">10.000</div>
+<div class="currency h4 text-muted mb-4">FCFA /
+mois</div>
+<ul class="list-unstyled mb-4">
+<li class="mb-3">
+<i class="fas fa-check text-success me-2"></
+i>
+Accès complet à la plateforme
+</li>
+<li class="mb-3">
+<i class="fas fa-check text-success me-2"></
+i>
+Support prioritaire
+</li>
+<li class="mb-3">
+<i class="fas fa-check text-success me-2"></
+i>
+Analytics détaillés
+</li>
+<li class="mb-3">
+<i class="fas fa-check text-success me-2"></
+i>
+Badges exclusifs
+</li>
+</ul></div>
+</div>
+</div>
+<!-- Formule Annuelle -->
+<div class="col-md-6 mb-4">
+<div class="dashboard-card p-4 h-100 text-center bor
+der-primary position-relative">
+<div class="position-absolute top-0 start-50 trans
+late-middle">
+<span class="badge bg-success rounded-pill px-3
+py-2">Économique</span>
+</div>
+<div class="py-4">
+<h4 class="fw-bold text-success mb-3">Annuel</h4
+>
+<div class="price display-3 fw-bold text-dark mb
+-3">100.000</div>
+<div class="currency h4 text-muted mb-4">FCFA /
+an</div>
+<div class="savings badge bg-success mb-4">Écono
+misez 20.000 FCFA</div>
+<ul class="list-unstyled mb-4">
+<li class="mb-3">
+<i class="fas fa-check text-success me-2"></i>
+Tous les avantages mensuels
+</li>
+<li class="mb-3">
+<i class="fas fa-check text-success me-2"></i>
+2 mois offerts
+</li>
+<li class="mb-3">
+<i class="fas fa-check text-success me-2"></i>
+Support premium 24/7
+</li>
+<li class="mb-3">
+<i class="fas fa-check text-success me-2"></i>
+Accès aux événements VIP
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Formulaire de paiement -->
+<div class="row mt-4">
+<div class="col-12">
+<div class="dashboard-card p-4">
+<h4 class="fw-bold mb-4">Informations de paiement
+</h4>
+<form method="post" action="/subscribe">
+<div class="row g-4">
+<div class="col-md-6">
+<div class="form-group">
+<label class="form-label fw-bold">
+le</label>
+📅 Formu
+<select name="plan" class="form-select" re
+quired>
+<option value="monthly">Mensuel - 10.000
+FCFA</option>
+<option value="annual">Annuel - 100.000
+FCFA</option>
+</select>
+</div>
+</div><div class="col-md-6">
+<div class="form-group">
+<label class="form-label fw-bold">
+de de paiement</label>
+💳 Métho
+<select name="method" class="form-select"
+required>
+<option value="mobile_money">Mobile Mone
+y</option>
+<option value="card">Carte Bancaire</opt
+ion>
+<option value="bank_transfer">Virement B
+ancaire</option>
+</select>
+</div>
+</div>
+<!-- Informations Mobile Money -->
+<div class="col-12" id="mobileMoneyFields">
+<div class="row g-3">
+<div class="col-md-6">
+<label class="form-label fw-bold">
+éro de téléphone</label>
+📱 Num
+<input type="tel" class="form-control" p
+laceholder="+229 XX XX XX XX">
+</div>
+<div class="col-md-6">
+<label class="form-label fw-bold">
+rateur</label>
+🏦 Opé
+<select class="form-select">
+<option>MTN Mobile Money</option>
+<option>Moov Money</option>
+<option>Flooz</option>
+</select>
+</div>
+</div>
+</div><div class="col-12">
+<div class="form-check mb-4">
+<input class="form-check-input" type="chec
+kbox" id="subscriptionTerms" required>
+<label class="form-check-label text-muted"
+for="subscriptionTerms">
+J'accepte les <a href="#" class="text-pr
+imary">conditions d'abonnement</a> et
+j'autorise CleanTech à prélever le monta
+nt correspondant à ma formule.
+</label>
+</div>
+</div>
+<div class="col-12">
+<button type="submit" class="btn btn-success
+btn-lg w-100 py-3">
+<i class="fas fa-lock me-2"></i>Payer et A
+ctiver l'Abonnement
+</button>
+</div>
+</div>
+</form>
+</div>
+</div>
+</div>
+<!-- Garanties -->
+<div class="row mt-5">
+<div class="col-12">
+<div class="dashboard-card p-4 text-center">
+<div class="row">
+<div class="col-md-4 mb-3">
+<div class="bg-primary rounded-circle p-3 d-in
+line-flex mb-3">
+<i class="fas fa-shield-alt fa-2x text-whit
+e"></i></div>
+<h6 class="fw-bold">Paiement Sécurisé</h6>
+<p class="text-muted small mb-0">Vos données s
+ont protégées</p>
+</div>
+<div class="col-md-4 mb-3">
+<div class="bg-success rounded-circle p-3 d-in
+line-flex mb-3">
+<i class="fas fa-sync fa-2x text-white"></i>
+</div>
+<h6 class="fw-bold">Annulation Simple</h6>
+<p class="text-muted small mb-0">Résiliez à to
+ut moment</p>
+</div>
+<div class="col-md-4 mb-3">
+<div class="bg-warning rounded-circle p-3 d-in
+line-flex mb-3">
+<i class="fas fa-headset fa-2x text-white">
+</i>
+</div>
+<h6 class="fw-bold">Support 7j/7</h6>
+<p class="text-muted small mb-0">Nous sommes l
+à pour vous</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+  <%- include('../partials/footer') %>
+

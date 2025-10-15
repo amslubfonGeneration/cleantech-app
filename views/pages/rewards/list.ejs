@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CleanTech - Recyclage Intelligent</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/public/css/m.css" />
+</head>
+<style>
+:root {
+--primary: #10b981;--primary-dark: #059669;
+--primary-light: #d1fae5;
+--secondary: #3b82f6;
+--secondary-dark: #2563eb;
+--accent: #f59e0b;
+--dark: #1f2937;
+--light: #f9fafb;
+}
+.dashboard-card {
+background: white;
+border-radius: 15px;
+box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+transition: all 0.3s ease;
+border: none;
+overflow: hidden;
+}
+.dashboard-card:hover {
+transform: translateY(-5px);
+box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+}
+.stat-card {
+background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+color: white;
+border-radius: 15px;
+padding: 1.5rem;
+}
+.nav-pills-custom .nav-link {
+border-radius: 10px;
+margin: 0.2rem 0;
+transition: all 0.3s ease;
+}
+.nav-pills-custom .nav-link.active {
+background: var(--primary);
+color: white;
+}
+</style>
+</head>
+<body>
+
+<%- include('../../partials/navbar', { user}) %>
+
+  <br><br>
+  <main style="padding-top: 80px;">
+<div class="container py-5">
+<div class="row">
+<div class="col-12">
+<div class="d-flex justify-content-between align-items-center mb-5">
+<div>
+<h1 class="h2 fw-bold text-dark mb-2">Récompenses Disponibles</h1>
+<p class="text-muted">Échangez vos points contre des récompenses exclusives</p>
+</div>
+<div class="bg-success text-white rounded-pill px-3 py-1">
+<small><i class="fas fa-coins me-1"></i><%= points %> points</small>
+</div>
+
+</div>
+<div class="row mb-4">
+<div class="col-12">
+<div class="dashboard-card p-4">
+<div class="row align-items-center">
+<div class="col-md-8">
+<h4 class="fw-bold mb-2">Votre solde de points</h4>
+<p class="text-muted mb-0">Utilisez vos points pour obtenir des récompenses écologiques</p>
+</div>
+<div class="col-md-4 text-md-end">
+<div class="display-4 fw-bold text-primary"><%= points %></div>
+<small class="text-muted">points disponibles</small>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-12">
+<div class="dashboard-card p-4">
+<% if (rewards.length === 0) { %>
+<div class="text-center py-5">
+<i class="fas fa-gift fa-4x text-muted mb-3"></i>
+<h5 class="text-muted">Aucune récompense disponible</h5>
+<p class="text-muted">De nouvelles récompenses arrivent bientôt !</p>
+</div>
+<% } else { %>
+<div class="table-responsive"><table class="table table-hover">
+<thead class="table-light">
+<tr>
+<th>Titre</th>
+<th>Description</th>
+<th>Points requis</th>
+<th>Statut</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<% rewards.forEach(r => { %>
+<tr>
+<td>
+<strong><%= r.name %></strong>
+</td>
+<td>
+<p class="mb-0 text-muted"><%= r.description %></p>
+</td>
+<td>
+<span class="badge bg-warning text-dark">
+<%= r.points_required %> points
+</span>
+</td>
+<td>
+<% if (points >= r.points_required) { %>
+<span class="badge bg-success">Disponible</span>
+<% } else { %>
+<span class="badge bg-secondary">Points insuffisants</span>
+<% } %>
+</td>
+<td>
+<% if (points >= r.points_required) { %><form method="post" action="/rewards/
+<%= r.id %>/redeem" class="d-inline">
+<button type="submit" class="btn btn-primary btn-sm">
+<i class="fas fa-exchange-alt me-1"></i>Réclamer
+</button>
+</form>
+<% } else { %>
+<button class="btn btn-outline-secondary btn-sm" disabled>
+<i class="fas fa-lock me-1"></i>Verrouillé
+</button>
+<% } %>
+</td>
+</tr>
+<% }) %>
+</tbody>
+</table>
+</div>
+<% } %>
+</div>
+</div>
+</div>
+</div>
+</main>
+  <%- include('../../partials/footer') %>
+

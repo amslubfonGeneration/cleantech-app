@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CleanTech - Recyclage Intelligent</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/public/css/m.css" />
+<style>
+:root {
+--primary: #10b981;--primary-dark: #059669;
+--primary-light: #d1fae5;
+--secondary: #3b82f6;
+--secondary-dark: #2563eb;
+--accent: #f59e0b;
+--dark: #1f2937;
+--light: #f9fafb;
+}
+.dashboard-card {
+background: white;
+border-radius: 15px;
+box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+transition: all 0.3s ease;
+border: none;
+overflow: hidden;
+}
+.dashboard-card:hover {
+transform: translateY(-5px);
+box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+}
+.stat-card {
+background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+color: white;
+border-radius: 15px;
+padding: 1.5rem;
+}
+.nav-pills-custom .nav-link {
+border-radius: 10px;
+margin: 0.2rem 0;
+transition: all 0.3s ease;
+}
+.nav-pills-custom .nav-link.active {
+background: var(--primary);
+color: white;
+}
+</style>
+</head>
+<body>
+
+<%- include('../../partials/navbar', { user, active: 'dashboard'}) %>
+  <br><br>
+ <main style="padding-top: 80px;">
+<div class="container py-5">
+<div class="row">
+<div class="col-12">
+<div class="d-flex justify-content-between align-items-cnter mb-5">
+<div>
+<h1 class="h2 fw-bold text-dark mb-2">Classement des
+Parrains</h1>
+<p class="text-muted">Découvrez les meilleurs parrai
+ns de la communauté</p>
+</div>
+<div class="bg-primary text-white rounded-pill px-3 py-1">
+<small><i class="fas fa-trophy me-1"></i>Classement
+</small>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><div class="col-12">
+<div class="dashboard-card p-4">
+<!-- Top 3 -->
+<% if (rows.length >= 3) { %>
+<div class="row mb-5">
+<div class="col-md-4">
+<div class="text-center">
+<div class="position-relative d-inline-block m
+b-3">
+<div class="bg-warning rounded-circle d-flex
+align-items-center justify-content-center mx-auto"
+style="width: 80px; height: 80px;">
+<i class="fas fa-crown fa-2x text-white">
+</i>
+</div>
+<div class="position-absolute top-0 start-10
+0 translate-middle bg-dark text-white rounded-circle d-flex alig
+n-items-center justify-content-center"
+style="width: 40px; height: 40px;">
+<strong>1</strong>
+</div>
+</div>
+<h5 class="fw-bold"><%= rows[0].name %></h5>
+<p class="text-muted"><%= rows[0].email %></p>
+<div class="bg-primary text-white rounded-pill
+px-3 py-1">
+<strong><%= rows[0].filleuls %> filleuls</st
+rong>
+</div>
+</div>
+</div>
+<div class="col-md-4">
+<div class="text-center">
+<div class="position-relative d-inline-block m
+b-3">
+<div class="bg-secondary rounded-circle d-flex align-items-center justify-content-center mx-auto"
+style="width: 70px; height: 70px;">
+<i class="fas fa-medal fa-2x text-white">
+</i>
+</div>
+<div class="position-absolute top-0 start-10
+0 translate-middle bg-dark text-white rounded-circle d-flex alig
+n-items-center justify-content-center"
+style="width: 40px; height: 40px;">
+<strong>2</strong>
+</div>
+</div>
+<h5 class="fw-bold"><%= rows[1].name %></h5>
+<p class="text-muted"><%= rows[1].email %></p>
+<div class="bg-success text-white rounded-pill
+px-3 py-1">
+<strong><%= rows[1].filleuls %> filleuls</strong>
+</div>
+</div>
+</div>
+<div class="col-md-4">
+<div class="text-center">
+<div class="position-relative d-inline-block m
+b-3">
+<div class="bg-warning rounded-circle d-flex
+align-items-center justify-content-center mx-auto"
+style="width: 60px; height: 60px;">
+<i class="fas fa-award fa-2x text-white">
+</i>
+</div>
+<div class="position-absolute top-0 start-10
+0 translate-middle bg-dark text-white rounded-circle d-flex alig
+n-items-center justify-content-center"style="width: 40px; height: 40px;">
+<strong>3</strong></div>
+</div>
+<h5 class="fw-bold"><%= rows[2].name %></h5>
+<p class="text-muted"><%= rows[2].email %></p>
+<div class="bg-info text-white rounded-pill px
+-3 py-1">
+<strong><%= rows[2].filleuls %> filleuls</strong>
+</div>
+</div>
+</div>
+</div>
+<% } %>
+<!-- Tableau complet -->
+<div class="table-responsive">
+<table class="table table-hover">
+<thead class="table-light">
+<tr>
+<th width="80">Rang</th>
+<th>Nom</th>
+<th>Email</th>
+<th>Filleuls</th>
+</tr>
+</thead>
+<tbody>
+<% rows.forEach((r, index) => { %>
+<tr class="<%= index < 3 ? 'table-warning' :
+'' %>">
+<td>
+<div class="d-flex align-items-center">
+<span class="badge bg-<%= index === 0 ?
+'warning' : index === 1 ? 'secondary' : index === 2 ? 'warning'
+: 'primary' %> me-2">
+<%= index + 1 %>
+</span>
+<% if (index < 3) { %><i class="fas fa-<%= index === 0 ? 'crown' : index === 1 ? 'medal' : 'award' %> text-<%= index === 0 ?
+'warning' : index === 1 ? 'secondary' : 'warning' %>"></i>
+<% } %>
+</div>
+</td>
+<td>
+<strong><%= r.name %></strong>
+</td>
+<td><%= r.email %></td>
+<td>
+<span class="badge bg-success rounded-pil
+l">
+<%= r.filleuls %> filleul(s)
+</span>
+</td>
+</tr>
+<% }) %>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<% if (totalPages > 1) { %>
+<nav class="mt-4">
+<ul class="pagination justify-content-center">
+<% for (let i = 1; i <= totalPages; i++) { %>
+<li class="page-item <%= i === page ? 'active'
+: '' %>">
+<a class="page-link" href="/leaderboard/parr
+ainage?page=<%= i %>">
+<%= i %>
+</a>
+</li>
+<% } %>
+</ul>
+</nav><% } %>
+</div>
+</div>
+</div>
+</div>
+</main>
+
+<footer class="bg-dark text-light py-5 mt-5">
+<div class="container">
+<div class="row">
+<div class="col-lg-4 mb-4">
+<h5 class="fw-bold mb-3">
+<i class="fas fa-recycle me-2 text-primary"></i>CleanTech
+</h5>
+<p class="text-light">Recyclage récompensé pour un avenir durable. Rejoignez notre communauté et faites la différence ensemble.</p>
+<div class="social-links d-flex gap-3">
+<a href="#" class="text-light"><i class="fab fa-facebook-f"></i></a>
+<a href="#" class="text-light"><i class="fab fa-twitter"></i></a>
+<a href="#" class="text-light"><i class="fab fa-instagram"></i></a>
+<a href="#" class="text-light"><i class="fab fa-linkedin-in"></i></a>
+</div>
+</div>
+<div class="col-lg-2 col-md-6 mb-4">
+<h6 class="fw-bold mb-3">Navigation</h6>
+<ul class="list-unstyled">
+<li class="mb-2"><a href="/" class="text-light text-decoration-none">Accueil</a></li>
+<li class="mb-2"><a href="/rewards" class="text-light text-decoration-none">Récompenses</a></li><li class="mb-2"><a href="/blog" class="text-light text-decoration-none">Blog</a></li>
+<li class="mb-2"><a href="/faq" class="text-light text-decoration-none">FAQ</a></li>
+</ul>
+</div>
+<div class="col-lg-3 col-md-6 mb-4">
+<h6 class="fw-bold mb-3">Liens utiles</h6>
+<ul class="list-unstyled">
+<li class="mb-2"><a href="/partners" class="text-light text-decoration-none">Partenaires</a></li>
+<li class="mb-2"><a href="/challenges" class="text-light text-decoration-none">Défis</a></li>
+<li class="mb-2"><a href="/leaderboard" class="text-light text-decoration-none">Classement</a></li>
+<li class="mb-2"><a href="/contact" class="text-light text-decoration-none">Contact</a></li>
+</ul>
+</div>
+<div class="col-lg-3 mb-4">
+<h6 class="fw-bold mb-3">Contact</h6>
+<ul class="list-unstyled">
+<li class="mb-2"><i class="fas fa-map-marker-alt me-2 text-primary"></i>Cotonou, Bénin</li>
+<li class="mb-2"><i class="fas fa-phone me-2 text-primary"></i>+229 XX XX XX XX</li>
+<li class="mb-2"><i class="fas fa-envelope me-2 text-primary"></i>contact@cleantech.bj</li>
+</ul>
+</div>
+</div>
+<hr class="my-4 bg-light">
+<div class="row align-items-center"><div class="col-md-6">
+<p class="mb-0 text-light">&copy; 2024 CleanTech. Tous droits réservés.</p>
+</div>
+<div class="col-md-6 text-md-end">
+<a href="#" class="text-light text-decoration-none me-3">Politique de confidentialité</a>
+<a href="#" class="text-light text-decoration-none">Conditions d'utilisation</a>
+</div>
+</div>
+</div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/public/js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+(function(){
+const p = new URLSearchParams(window.location.search);
+const s = p.get('success');
+const e = p.get('error');
+if (s) {
+Swal.fire({
+icon: 'success',
+title: 'Succès',
+text: s,
+confirmButtonColor: '#10b981',
+timer: 3000
+});
+}
+if (e) {
+Swal.fire({icon: 'error',
+title: 'Erreur',
+text: e,
+confirmButtonColor: '#ef4444'
+});
+}
+})();
+</script>
+</body>
+</html>
+
+

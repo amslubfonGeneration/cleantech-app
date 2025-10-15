@@ -1,0 +1,176 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CleanTech - Recyclage Intelligent</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/public/css/m.css" />
+</head>
+<style>
+:root {
+--primary: #10b981;--primary-dark: #059669;
+--primary-light: #d1fae5;
+--secondary: #3b82f6;
+--secondary-dark: #2563eb;
+--accent: #f59e0b;
+--dark: #1f2937;
+--light: #f9fafb;
+}
+.dashboard-card {
+background: white;
+border-radius: 15px;
+box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+transition: all 0.3s ease;
+border: none;
+overflow: hidden;
+}
+.dashboard-card:hover {
+transform: translateY(-5px);
+box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+}
+.stat-card {
+background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+color: white;
+border-radius: 15px;
+padding: 1.5rem;
+}
+.nav-pills-custom .nav-link {
+border-radius: 10px;
+margin: 0.2rem 0;
+transition: all 0.3s ease;
+}
+.nav-pills-custom .nav-link.active {
+background: var(--primary);
+color: white;
+}
+</style>
+</head>
+<body>
+
+  <%- include('../../../partials/navbar', { user }) %>
+<main style="padding-top: 80px;">
+<div class="container py-5">
+<div class="row">
+<div class="col-12">
+<div class="d-flex justify-content-between align-items-center mb-5">
+<div>
+<h1 class="h2 fw-bold text-dark mb-2">Défis Écologiques</h1>
+<p class="text-muted">Relevez des défis et gagnez des points bonus</p>
+</div>
+<div class="bg-warning text-dark rounded-pill px-3 py-1">
+<small><i class="fas fa-trophy me-1"></i>Défis</small>
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+<% if (challenges.length === 0) { %>
+<div class="col-12">
+<div class="dashboard-card p-5 text-center">
+<i class="fas fa-trophy fa-4x text-muted mb-3"></i>
+<h5 class="text-muted">Aucun défi disponible</h5>
+<p class="text-muted">De nouveaux défis arrivent bientôt !</p>
+</div>
+</div>
+<% } else { %>
+<% challenges.forEach(c => { %>
+<div class="col-lg-6 mb-4">
+<div class="dashboard-card p-4 h-100"><div class="d-flex justify-content-between align-items-start mb-3">
+<h5 class="fw-bold mb-0"><%= c.name %></h5>
+<span class="badge bg-success">+<%= c.bonus_points %> points
+</span>
+</div>
+<p class="text-muted mb-3"><%= c.description %></p>
+<div class="row mb-3">
+<div class="col-6">
+<small class="text-muted">
+<i class="fas fa-user-tie me-1"></i>
+<%= c.sponsor %>
+</small>
+</div>
+<div class="col-6 text-end">
+<small class="text-muted">
+<i class="fas fa-users me-1"></i>
+<%= c.participants || 0 %> participants
+</small>
+</div>
+</div>
+<div class="d-flex justify-content-between align-items-center">
+<div>
+<small class="text-muted d-block">
+<i class="fas fa-play me-1"></i>
+<%= new Date(c.start_date * 1000).toLocaleDateString() %>
+</small>
+<small class="text-muted">
+<i class="fas fa-flag-checkered me-1"></i>
+<%= new Date(c.end_date * 1000).toLocaleDateString() %>
+</small>
+</div>
+<form method="post" action="/challenges/<%= c.id%>/join">
+<button type="submit" class="btn btn-primary btn-sm">
+<i class="fas fa-plus me-1"></i>Participer
+</button>
+</form>
+</div>
+</div>
+</div>
+<% }) %>
+<% } %>
+</div>
+<!-- CTA -->
+<div class="row mt-5">
+<div class="col-12">
+<div class="dashboard-card p-5 text-center bg-gradient-primary text-white">
+<h4 class="fw-bold mb-3">🚀 Prêt à relever le défi ?</h4>
+
+<p class="mb-4 opacity-75">Rejoignez notre communauté et commencez à gagner des points dès aujourd'hui</p>
+<% if (user) { %>
+<a href="/dashboard" class="btn btn-warning btn-lg">
+<i class="fas fa-rocket me-2">Voir mon tableau de bord</i>
+</a>
+<% } else { %>
+<a href="/register" class="btn btn-warning btn-lg">
+<i class="fas fa-user-plus me-2">CReer un compte</i>
+</a>
+<% } %></div>
+</div>
+</div>
+</div>
+</main>
+
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/public/js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+(function(){
+const p = new URLSearchParams(window.location.search);
+const s = p.get('success');
+const e = p.get('error');
+if (s) {
+Swal.fire({
+icon: 'success',
+title: 'Succès',
+text: s,
+confirmButtonColor: '#10b981',
+timer: 3000
+});
+}
+if (e) {
+Swal.fire({icon: 'error',
+title: 'Erreur',
+text: e,
+confirmButtonColor: '#ef4444'
+});
+}
+})();
+</script>
+</body>
+</html>
+
+
+

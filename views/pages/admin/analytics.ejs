@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CleanTech - Recyclage Intelligent</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/public/css/m.css" />
+</head>
+<style>
+:root {
+--primary: #10b981;--primary-dark: #059669;
+--primary-light: #d1fae5;
+--secondary: #3b82f6;
+--secondary-dark: #2563eb;
+--accent: #f59e0b;
+--dark: #1f2937;
+--light: #f9fafb;
+}
+.dashboard-card {
+background: white;
+border-radius: 15px;
+box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+transition: all 0.3s ease;
+border: none;
+overflow: hidden;
+}
+.dashboard-card:hover {
+transform: translateY(-5px);
+box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+}
+.stat-card {
+background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+color: white;
+border-radius: 15px;
+padding: 1.5rem;
+}
+.nav-pills-custom .nav-link {
+border-radius: 10px;
+margin: 0.2rem 0;
+transition: all 0.3s ease;
+}
+.nav-pills-custom .nav-link.active {
+background: var(--primary);
+color: white;
+}
+</style>
+</head>
+<body>
+<%- include('../../partials/navbar', { user}) %>
+
+  <br>
+  <main style="padding-top: 80px;">
+<div class="container py-5">
+<div class="row">
+<div class="col-12">
+<div class="d-flex justify-content-between align-items-center mb-5">
+<div>
+<h1 class="h2 fw-bold text-dark mb-2">Analytics CleanTech</h1>
+<p class="text-muted">Analysez les performances de votre plateforme</p>
+</div>
+<div class="bg-primary text-white rounded-pill px-3 py-1">
+<small><i class="fas fa-chart-bar me-1"></i>Analytics</small>
+</div>
+</div></div>
+</div>
+<!-- Filtres -->
+<div class="row mb-5">
+<div class="col-12">
+<div class="dashboard-card p-4">
+<h4 class="fw-bold mb-4">📊 Filtres d'analyse</h4>
+<form method="get" class="row g-3">
+<div class="col-md-3">
+<label class="form-label fw-bold">Période</label>
+<select name="period" class="form-select">
+<option value="week" <%= filters.period==='week'?'selected':'' %>>7 derniers jours</option>
+<option value="month" <%= filters.period==='month'?'selected':'' %>>30 jours</option>
+<option value="year" <%= filters.period==='year'?'selected':'' %>>12 mois</option>
+</select>
+</div>
+<div class="col-md-3">
+<label class="form-label fw-bold">Région</label>
+<select name="region" class="form-select">
+<option value="all">Toutes les régions</option>
+<option value="Cotonou" <%= filters.region==='Cotonou'?'selected':'' %>>Cotonou</option>
+<option value="Porto-Novo" <%= filters.region==='Porto-Novo'?'selected':'' %>>Porto-Novo</option>
+</select>
+</div>
+<div class="col-md-3">
+<label class="form-label fw-bold">Type de déchet</label>
+<select name="waste_type" class="form-select">
+<option value="all">Tous les types</option>
+<option value="plastique" <%= filters.waste_type==='plastique'?'selected':'' %>>Plastique</option><option value="métal" <%= filters.waste_type==='métal'?'selected':'' %>>Métal</option>
+<option value="papier" <%= filters.waste_type==='papier'?'selected':'' %>>Papier</option>
+</select>
+</div>
+<div class="col-md-3 d-flex align-items-end">
+<button type="submit" class="btn btn-primary w-100">
+<i class="fas fa-filter me-2">Appliquer</i>
+</button>
+</div>
+</form>
+</div>
+</div>
+</div>
+<!-- Statistiques -->
+<div class="row mb-5">
+<div class="col-md-6 mb-4">
+<div class="stat-card text-white">
+<div class="d-flex justify-content-between align-items-start">
+<div>
+<h3 class="h2 fw-bold mb-1"><%= stats.recycled || 0 %> kg</h3>
+<p class="mb-0">Déchets recyclés</p>
+</div>
+<div class="bg-white bg-opacity-20 rounded-circle p-3">
+<i class="fas fa-recycle fa-lg"></i>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-6 mb-4"><div class="stat-card text-white" style="background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);">
+<div class="d-flex justify-content-between align-items-start">
+<div>
+<h3 class="h2 fw-bold mb-1"><%= stats.deposits || 0 %></h3>
+<p class="mb-0">Dépôts effectués</p>
+</div>
+<div class="bg-white bg-opacity-20 rounded-circle p-3">
+<i class="fas fa-box fa-lg"></i>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Challenges -->
+<div class="row">
+<div class="col-12">
+<div class="dashboard-card p-4">
+<h4 class="fw-bold mb-4">🔥 Challenges en cours</h4>
+<% if (challenges.length === 0) { %>
+<div class="text-center py-4">
+<i class="fas fa-trophy fa-3x text-muted mb-3"></i>
+<p class="text-muted">Aucun challenge en cours</p>
+</div>
+<% } else { %>
+<div class="table-responsive">
+<table class="table table-hover">
+<thead class="table-light">
+<tr>
+<th>Nom</th>
+<th>Sponsor</th>
+<th>Participants</th><th>Bonus distribué</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody>
+<% challenges.forEach(c => { %>
+<tr>
+<td>
+<strong><%= c.name %></strong>
+</td>
+<td><%= c.sponsor %></td>
+<td>
+<span class="badge bg-primary"><%= c.participants %></span>
+</td>
+<td>
+<span class="text-success fw-bold"><%=c.total_bonus %> pts</span>
+</td>
+<td>
+<a href="/admin/challenges/<%= c.id %>/participants" class="btn btn-outline-info btn-sm">
+<i class="fas fa-users me-1">Voir</i>
+</a>
+</td>
+</tr>
+<% }) %>
+</tbody>
+</table>
+</div>
+<% } %>
+</div>
+</div>
+</div>
+</div>
+</main>
+
+<footer class="bg-dark text-light py-5 mt-5">
+<div class="container">
+<div class="row">
+<div class="col-lg-4 mb-4">
+<h5 class="fw-bold mb-3">
+<i class="fas fa-recycle me-2 text-primary"></i>CleanTech</h5>
+<p class="text-light">Recyclage récompensé pour un avenir durable. Rejoignez notre communauté et faites la différence ensemble.</p>
+<div class="social-links d-flex gap-3">
+<a href="#" class="text-light"><i class="fab fa-facebook-f"></i></a>
+<a href="#" class="text-light"><i class="fab fa-twitter"></i></a>
+<a href="#" class="text-light"><i class="fab fa-instagram"></i></a>
+<a href="#" class="text-light"><i class="fab fa-linkedin-in"></i></a>
+</div>
+</div>
+<div class="col-lg-2 col-md-6 mb-4">
+<h6 class="fw-bold mb-3">Navigation</h6>
+<ul class="list-unstyled">
+<li class="mb-2"><a href="/" class="text-light text-decoration-none">Accueil</a></li>
+<li class="mb-2"><a href="/rewards" class="text-light text-decoration-none">Récompenses</a></li><li class="mb-2"><a href="/blog" class="text-light text-decoration-none">Blog</a></li>
+<li class="mb-2"><a href="/faq" class="text-light text-decoration-none">FAQ</a></li>
+</ul>
+</div>
+<div class="col-lg-3 col-md-6 mb-4">
+<h6 class="fw-bold mb-3">Liens utiles</h6>
+<ul class="list-unstyled">
+<li class="mb-2"><a href="/partners" class="text-light text-decoration-none">Partenaires</a></li>
+<li class="mb-2"><a href="/challenges" class="text-light text-decoration-none">Défis</a></li>
+<li class="mb-2"><a href="/leaderboard" class="text-light text-decoration-none">Classement</a></li>
+<li class="mb-2"><a href="/contact" class="text-light text-decoration-none">Contact</a></li>
+</ul>
+</div>
+<div class="col-lg-3 mb-4">
+<h6 class="fw-bold mb-3">Contact</h6>
+<ul class="list-unstyled">
+<li class="mb-2"><i class="fas fa-map-marker-alt me-2 text-primary"></i>Cotonou, Bénin</li>
+<li class="mb-2"><i class="fas fa-phone me-2 text-primary"></i>+229 XX XX XX XX</li>
+<li class="mb-2"><i class="fas fa-envelope me-2 text-primary"></i>contact@cleantech.bj</li>
+</ul>
+</div>
+</div>
+<hr class="my-4 bg-light">
+<div class="row align-items-center"><div class="col-md-6">
+<p class="mb-0 text-light">&copy; 2024 CleanTech. Tous droits réservés.</p>
+</div>
+<div class="col-md-6 text-md-end">
+<a href="#" class="text-light text-decoration-none me-3">Politique de confidentialité</a>
+<a href="#" class="text-light text-decoration-none">Conditions d'utilisation</a>
+</div>
+</div>
+</div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/public/js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+(function(){
+const p = new URLSearchParams(window.location.search);
+const s = p.get('success');
+const e = p.get('error');
+if (s) {
+Swal.fire({
+icon: 'success',
+title: 'Succès',
+text: s,
+confirmButtonColor: '#10b981',
+timer: 3000
+});
+}
+if (e) {
+Swal.fire({icon: 'error',
+title: 'Erreur',
+text: e,
+confirmButtonColor: '#ef4444'
+});
+}
+})();
+</script>
+</body>
+</html>
+
+

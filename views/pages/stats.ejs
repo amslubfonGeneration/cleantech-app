@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CleanTech - Recyclage Intelligent</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/public/css/m.css" />
+</head>
+<style>
+:root {
+--primary: #10b981;--primary-dark: #059669;
+--primary-light: #d1fae5;
+--secondary: #3b82f6;
+--secondary-dark: #2563eb;
+--accent: #f59e0b;
+--dark: #1f2937;
+--light: #f9fafb;
+}
+.dashboard-card {
+background: white;
+border-radius: 15px;
+box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+transition: all 0.3s ease;
+border: none;
+overflow: hidden;
+}
+.dashboard-card:hover {
+transform: translateY(-5px);
+box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+}
+.stat-card {
+background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+color: white;
+border-radius: 15px;
+padding: 1.5rem;
+}
+.nav-pills-custom .nav-link {
+border-radius: 10px;
+margin: 0.2rem 0;
+transition: all 0.3s ease;
+}
+.nav-pills-custom .nav-link.active {
+background: var(--primary);
+color: white;
+}
+</style>
+</head>
+<body>
+<%- include('../partials/navbar', { user}) %>
+  <br>
+<main style="padding-top: 80px;">
+<div class="container py-5">
+<div class="row">
+<div class="col-12">
+<div class="d-flex justify-content-between align-items-center mb-5">
+<div>
+<h1 class="h2 fw-bold text-dark mb-2">Statistiques CleanTech</h1>
+<p class="text-muted">Analysez l'impact de notre communauté écologique</p>
+</div><div class="bg-primary text-white rounded-pill px-3 py-1">
+<small><i class="fas fa-chart-bar me-1"></i>Statistiques</small>
+</div>
+</div>
+</div>
+</div>
+<!-- Cartes de statistiques principales -->
+<div class="row mb-5">
+<div class="col-xl-3 col-md-6 mb-4">
+<div class="stat-card text-white">
+<div class="d-flex justify-content-between align-items
+-start">
+<div>
+<h3 class="h2 fw-bold mb-1"><%= totalUsers %></h3>
+<p class="mb-0">Utilisateurs</p>
+</div>
+<div class="bg-white bg-opacity-20 rounded-circle p-3">
+<i class="fas fa-users fa-lg"></i>
+</div>
+</div>
+</div>
+</div>
+<div class="col-xl-3 col-md-6 mb-4">
+<div class="stat-card text-white" style="background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);">
+<div class="d-flex justify-content-between align-items-start">
+<div>
+<h3 class="h2 fw-bold mb-1"><%= totalReferrals %>
+</h3>
+<p class="mb-0">Parrainages</p>
+</div><div class="bg-white bg-opacity-20 rounded-circle p-3">
+<i class="fas fa-user-plus fa-lg"></i>
+</div>
+</div>
+</div>
+</div>
+<div class="col-xl-3 col-md-6 mb-4">
+<div class="stat-card text-white" style="background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);">
+<div class="d-flex justify-content-between align-items-start">
+<div>
+<h3 class="h2 fw-bold mb-1"><%= totalBadges %></h3>
+<p class="mb-0">Badges attribués</p>
+</div>
+<div class="bg-white bg-opacity-20 rounded-circle p-3">
+<i class="fas fa-medal fa-lg"></i>
+</div>
+</div>
+</div>
+</div>
+<div class="col-xl-3 col-md-6 mb-4">
+<div class="stat-card text-white" style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);">
+<div class="d-flex justify-content-between align-items-start">
+<div>
+<h3 class="h2 fw-bold mb-1"><%= totalRewards %></h3>
+<p class="mb-0">Récompenses</p>
+</div>
+<div class="bg-white bg-opacity-20 rounded-circle p-3">
+<i class="fas fa-gift fa-lg"></i>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Deuxième ligne de statistiques -->
+<div class="row mb-5">
+<div class="col-md-4 mb-4">
+<div class="dashboard-card p-4 text-center">
+<div class="bg-success rounded-circle p-3 d-inline-flex mb-3">
+<i class="fas fa-money-bill-wave fa-2x text-white">
+</i>
+</div>
+<h3 class="fw-bold text-success"><%= revenue %> XOF</h3>
+<p class="text-muted mb-0">Revenus générés</p>
+</div>
+</div>
+<div class="col-md-4 mb-4">
+<div class="dashboard-card p-4 text-center">
+<div class="bg-info rounded-circle p-3 d-inline-flex mb-3">
+<i class="fas fa-credit-card fa-2x text-white"></i>
+</div>
+<h3 class="fw-bold text-info"><%= totalSubscriptions %></h3>
+<p class="text-muted mb-0">Abonnements actifs</p>
+</div>
+</div>
+<div class="col-md-4 mb-4">
+<div class="dashboard-card p-4 text-center"><div class="bg-warning rounded-circle p-3 d-inline-flex mb-3">
+<i class="fas fa-coins fa-2x text-white"></i>
+</div>
+<h3 class="fw-bold text-warning"><%= totalPoints %></h3>
+<p class="text-muted mb-0">Points distribués</p>
+</div>
+</div>
+</div>
+<!-- Répartition par rôle -->
+<div class="row">
+<div class="col-12">
+<div class="dashboard-card p-4">
+<h4 class="fw-bold mb-4">📊 Répartition par rôle</h4>
+<div class="table-responsive">
+<table class="table table-hover">
+<thead class="table-light">
+<tr>
+<th>Rôle</th>
+<th>Nombre</th>
+<th>Pourcentage</th>
+<th>Évolution</th>
+</tr>
+</thead>
+<tbody>
+<% byRole.forEach(r => { %>
+<tr>
+<td>
+<div class="d-flex align-items-center">
+<div class="bg-<%= r.role === 'admin' ?'danger' : r.role === 'partner' ? 'warning' : r.role === 'investor' ? 'success' : 'primary' %> rounded-circle d-flex align-items-center justify-content-center me-3"style="width: 40px; height: 40px;">
+<i class="fas fa-<%= r.role === 'admin' ? 'cog' : r.role === 'partner' ? 'handshake' : r.role === 'investor' ? 'chart-line' : 'user' %> text-white"></i>
+</div>
+<span class="text-capitalize fw-bold"><%= r.role %></span>
+</div>
+</td>
+<td>
+<strong><%= r.count %></strong>
+</td>
+<td>
+<div class="progress" style="height: 10px;">
+<div class="progress-bar bg-<%= r.role === 'admin' ? 'danger' : r.role === 'partner' ? 'warning' : r.role === 'investor' ? 'success' : 'primary' %>" style="width: <%= (r.count / totalUsers) * 100 %>%"></div>
+</div>
+<small class="text-muted"><%= ((r.count /totalUsers) * 100).toFixed(1) %>%</small>
+</td>
+<td>
+<span class="badge bg-success">
+<i class="fas fa-arrow-up me-1"></i>+<%=Math.floor(Math.random() * 15) %>%
+</span>
+</td>
+</tr>
+<% }) %>
+</tbody>
+</table>
+</div>
+</div>
+</main>
+
+
+<%- include('../partials/footer') %>

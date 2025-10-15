@@ -1,0 +1,60 @@
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="/"><i class="fas fa-recycle"></i>CleanTech</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item"><a class="nav-link active" href="/">Accueil</a></li>
+        <li class="nav-item"><a class="nav-link" href="/#process">Fonctionnement</a></li>
+        <li class="nav-item"><a class="nav-link" href="/#features">Avantages</a></li>
+        <% if (user) { %>
+        <% if(user.role === 'partner' || user.role === 'admin' || user.role === 'investor'){ %>
+          <li class="nav-item"><a class="nav-link" href="/stats">Statistiques</a></li>
+        <% } %>
+        <% } %>
+      </ul>
+      <br><br>
+      <div class="d-flex">
+        <% if (user) { %>
+        <div class="rounded-circle bg-primary text-white text-center me-2" style="width:32px;height:32px;line-height:32px;font-weight:bold">
+        <%= user.name.charAt(0).toUpperCase() %>
+      </div>
+      <% } %>
+    </a>
+    <% if (user) { %>
+  
+    <% if (user.role === 'user') { %>
+      
+    <form action="/users/dashboard" method="get"><button class="btn btn-primary">Mon espace</button></form>
+  
+    <% } else if (user.role === 'investor') { %>
+    <form action="/investor/dashboard" method="get"><button class="btn btn-primary">Mon espace</button></form>
+  
+    <% } else if (user.role === 'partner') { %>
+    <form action="/partners/dashboard" method="get"><button class="btn btn-primary">Mon espace</button></form>
+  
+    <% } else if (user.role === 'agent') { %>
+    <form action="/agents/dashboard" method="get"><button class="btn btn-primary">Mon espace</button></form>
+  
+     <% } else if (user.role === 'admin') { %>
+          <form action="/admin/dashboard" method="get"><button class="btn btn-primary">Mon espace</button></form>
+  
+    <% } %>
+
+
+    <form action="/auth/logout" method="post"><button class="btn btn-primary">Déconnexion</button></form>
+        
+
+          <% } else { %>
+          <a href="#" class="btn btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#loginModal">Connexion</a>
+          <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerModal">Inscription</a>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<%- include('flash' ) %>
+

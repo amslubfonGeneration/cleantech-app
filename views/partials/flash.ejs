@@ -1,0 +1,39 @@
+<!-- Modals for Auth -->
+<div class="modal fade" id="loginModal" tabindex="-1">
+  <div class="modal-dialog">
+    <form class="modal-content" action="/auth/login" method="post">
+      <div class="modal-header"><h5 class="modal-title">Connexion</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+      <div class="modal-body">
+        <div class="mb-3"><label class="form-label">Email</label><input name="email" type="email" class="form-control" required></div>
+        <div class="mb-3"><label class="form-label">Mot de passe</label><input name="password" type="password" class="form-control" required></div>
+      </div>
+      <div class="modal-footer"><button class="btn btn-primary">Se connecter</button></div>
+    </form>
+  </div>
+</div>
+
+<div class="modal fade" id="registerModal" tabindex="-1">
+  <div class="modal-dialog">
+    <% if (ref) { %>
+    <form class="modal-content" action="/auth/register/?ref=<%= ref %>" method="post">
+      <div class="modal-header"><h5 class="modal-title">Inscription</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+      <div class="modal-body">
+        <div class="mb-3"><label class="form-label">Nom</label><input name="name" class="form-control" required></div>
+        <div class="mb-3"><label class="form-label">Email</label><input name="email" type="email" class="form-control" required></div>
+        <div class="mb-3"><label class="form-label">Mot de passe</label><input name="password" type="password" class="form-control" required></div>
+      </div>
+      <div class="modal-footer"><button class="btn btn-primary">Créer le compte</button></div>
+    </form>
+    <% } else { %>
+    <form class="modal-content" action="/auth/register/" method="post">
+      <div class="modal-header"><h5 class="modal-title">Inscription</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+      <div class="modal-body">
+        <div class="mb-3"><label class="form-label">Nom</label><input name="name" class="form-control" required></div>
+        <div class="mb-3"><label class="form-label">Email</label><input name="email" type="email" class="form-control" required></div>
+        <div class="mb-3"><label class="form-label">Mot de passe</label><input name="password" type="password" class="form-control" required></div>
+      </div>
+      <div class="modal-footer"><button class="btn btn-primary">Créer le compte</button></div>
+    </form>
+    <% } %>
+  </div>
+</div>
