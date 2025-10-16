@@ -58,47 +58,35 @@ color: white;
 <div class="col-lg-10">
 <div class="text-center mb-5">
 <h1 class="h2 fw-bold text-dark mb-3">
-💳 Abonnement <%
-= user.role === 'partner' ? 'Partenaire' : 'Investisseur' %></h1
->
-<p class="text-muted lead">Choisissez la formule qui c
-orrespond à vos besoins</p>
+💳 Abonnement <%= user.role === 'partner' ? 'Partenaire' : 'Investisseur' %></h1>
+<p class="text-muted lead">Choisissez la formule qui correspond à vos besoins</p>
 </div>
 <div class="row">
 <!-- Formule Mensuelle -->
 <div class="col-md-6 mb-4">
 <div class="dashboard-card p-4 h-100 text-center position-relative">
-<div class="position-absolute top-0 start-50 trans
-late-middle">
-<span class="badge bg-primary rounded-pill px-3
-py-2">Populaire</span>
+<div class="position-absolute top-0 start-50 translate-middle">
+<span class="badge bg-primary rounded-pill px-3py-2">Populaire</span>
 </div>
 <div class="py-4">
-<h4 class="fw-bold text-primary mb-3">Mensuel</h
-4>
-<div class="price display-3 fw-bold text-dark mb
--3">10.000</div>
-<div class="currency h4 text-muted mb-4">FCFA /
-mois</div>
+<h4 class="fw-bold text-primary mb-3">Mensuel</h4>
+<div class="price display-3 fw-bold text-dark mb-3">10.000</div>
+<div class="currency h4 text-muted mb-4">FCFA /mois</div>
 <ul class="list-unstyled mb-4">
 <li class="mb-3">
-<i class="fas fa-check text-success me-2"></
-i>
+<i class="fas fa-check text-success me-2"></i>
 Accès complet à la plateforme
 </li>
 <li class="mb-3">
-<i class="fas fa-check text-success me-2"></
-i>
+<i class="fas fa-check text-success me-2"></i>
 Support prioritaire
 </li>
 <li class="mb-3">
-<i class="fas fa-check text-success me-2"></
-i>
+<i class="fas fa-check text-success me-2"></i>
 Analytics détaillés
 </li>
 <li class="mb-3">
-<i class="fas fa-check text-success me-2"></
-i>
+<i class="fas fa-check text-success me-2"></i>
 Badges exclusifs
 </li>
 </ul></div>
@@ -106,22 +94,15 @@ Badges exclusifs
 </div>
 <!-- Formule Annuelle -->
 <div class="col-md-6 mb-4">
-<div class="dashboard-card p-4 h-100 text-center bor
-der-primary position-relative">
-<div class="position-absolute top-0 start-50 trans
-late-middle">
-<span class="badge bg-success rounded-pill px-3
-py-2">Économique</span>
+<div class="dashboard-card p-4 h-100 text-center border-primary position-relative">
+<div class="position-absolute top-0 start-50 translate-middle">
+<span class="badge bg-success rounded-pill px-3py-2">Économique</span>
 </div>
 <div class="py-4">
-<h4 class="fw-bold text-success mb-3">Annuel</h4
->
-<div class="price display-3 fw-bold text-dark mb
--3">100.000</div>
-<div class="currency h4 text-muted mb-4">FCFA /
-an</div>
-<div class="savings badge bg-success mb-4">Écono
-misez 20.000 FCFA</div>
+<h4 class="fw-bold text-success mb-3">Annuel</h4>
+<div class="price display-3 fw-bold text-dark mb-3">100.000</div>
+<div class="currency h4 text-muted mb-4">FCFA /an</div>
+<div class="savings badge bg-success mb-4">Économisez 20.000 FCFA</div>
 <ul class="list-unstyled mb-4">
 <li class="mb-3">
 <i class="fas fa-check text-success me-2"></i>
@@ -155,29 +136,23 @@ Accès aux événements VIP
 <div class="col-md-6">
 <div class="form-group">
 <label class="form-label fw-bold">
-le</label>
-📅 Formu
-<select name="plan" class="form-select" re
-quired>
-<option value="monthly">Mensuel - 10.000
-FCFA</option>
-<option value="annual">Annuel - 100.000
-FCFA</option>
+📅 Formule</label>
+
+<select name="plan" class="form-select" required>
+<option value="monthly">Mensuel - 10.000 FCFA</option>
+<option value="annual">Annuel - 100.000 FCFA</option>
 </select>
 </div>
 </div><div class="col-md-6">
 <div class="form-group">
 <label class="form-label fw-bold">
-de de paiement</label>
-💳 Métho
-<select name="method" class="form-select"
-required>
-<option value="mobile_money">Mobile Mone
-y</option>
+💳 Méthode de paiement</label>
+
+<select name="method" class="form-select"required>
+<option value="mobile_money">Mobile Money</option>
 <option value="card">Carte Bancaire</opt
 ion>
-<option value="bank_transfer">Virement B
-ancaire</option>
+<option value="bank_transfer">Virement Bancaire</option>
 </select>
 </div>
 </div>
@@ -186,15 +161,14 @@ ancaire</option>
 <div class="row g-3">
 <div class="col-md-6">
 <label class="form-label fw-bold">
-éro de téléphone</label>
-📱 Num
-<input type="tel" class="form-control" p
-laceholder="+229 XX XX XX XX">
+📱 Numéro de téléphone</label>
+
+<input type="tel" class="form-control" placeholder="+229 XX XX XX XX">
 </div>
 <div class="col-md-6">
 <label class="form-label fw-bold">
-rateur</label>
-🏦 Opé
+🏦 Opérateur</label>
+
 <select class="form-select">
 <option>MTN Mobile Money</option>
 <option>Moov Money</option>
@@ -204,22 +178,16 @@ rateur</label>
 </div>
 </div><div class="col-12">
 <div class="form-check mb-4">
-<input class="form-check-input" type="chec
-kbox" id="subscriptionTerms" required>
-<label class="form-check-label text-muted"
-for="subscriptionTerms">
-J'accepte les <a href="#" class="text-pr
-imary">conditions d'abonnement</a> et
-j'autorise CleanTech à prélever le monta
-nt correspondant à ma formule.
+<input class="form-check-input" type="checkbox" id="subscriptionTerms" required>
+<label class="form-check-label text-muted" for="subscriptionTerms">J'accepte les <a href="#" class="text-primary">conditions d'abonnement</a> et
+j'autorise CleanTech à prélever le montant correspondant à ma formule.
 </label>
 </div>
 </div>
 <div class="col-12">
 <button type="submit" class="btn btn-success
 btn-lg w-100 py-3">
-<i class="fas fa-lock me-2"></i>Payer et A
-ctiver l'Abonnement
+<i class="fas fa-lock me-2"></i>Payer et Activer l'Abonnement
 </button>
 </div>
 </div>
@@ -233,32 +201,25 @@ ctiver l'Abonnement
 <div class="dashboard-card p-4 text-center">
 <div class="row">
 <div class="col-md-4 mb-3">
-<div class="bg-primary rounded-circle p-3 d-in
-line-flex mb-3">
-<i class="fas fa-shield-alt fa-2x text-whit
-e"></i></div>
+<div class="bg-primary rounded-circle p-3 d-inline-flex mb-3">
+<i class="fas fa-shield-alt fa-2x text-white"></i></div>
 <h6 class="fw-bold">Paiement Sécurisé</h6>
-<p class="text-muted small mb-0">Vos données s
-ont protégées</p>
+<p class="text-muted small mb-0">Vos données sont protégées</p>
 </div>
 <div class="col-md-4 mb-3">
-<div class="bg-success rounded-circle p-3 d-in
-line-flex mb-3">
+<div class="bg-success rounded-circle p-3 d-inline-flex mb-3">
 <i class="fas fa-sync fa-2x text-white"></i>
 </div>
 <h6 class="fw-bold">Annulation Simple</h6>
-<p class="text-muted small mb-0">Résiliez à to
-ut moment</p>
+<p class="text-muted small mb-0">Résiliez à tout moment</p>
 </div>
 <div class="col-md-4 mb-3">
-<div class="bg-warning rounded-circle p-3 d-in
-line-flex mb-3">
+<div class="bg-warning rounded-circle p-3 d-inline-flex mb-3">
 <i class="fas fa-headset fa-2x text-white">
 </i>
 </div>
 <h6 class="fw-bold">Support 7j/7</h6>
-<p class="text-muted small mb-0">Nous sommes l
-à pour vous</p>
+<p class="text-muted small mb-0">Nous sommes là pour vous</p>
 </div>
 </div>
 </div>

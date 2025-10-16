@@ -66,6 +66,8 @@ export default async function (fastify) {
     if (user.role === 'admin') return reply.redirect('/admin/dashboard');
     if (user.role === 'agent') return reply.redirect('/agents/dashboard');
     if (user.role === 'partner') return reply.redirect('/partners/dashboard');
+    if (user.role === 'investor') return reply.redirect('/investors/dashboard');
+   
     return reply.redirect('/users/dashboard');
   });
 

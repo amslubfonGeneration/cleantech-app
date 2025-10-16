@@ -8,7 +8,11 @@
     "dev": "node --watch server.js",
     "start": "NODE_ENV=production node server.js",
     "migrate": "node scripts/migrate.js",
-    "seed": "node scripts/seed.js"
+    "seed": "node scripts/seed.js",
+    "postinstall": "npm rebuild better-sqlite3 --build-from-source"
+  },
+  "engines": {
+    "node": "20.x"
   },
   "dependencies": {
     "@fastify/cookie": "^11.0.2",
@@ -32,3 +36,4 @@
     "stripe": "^18.5.0"
   }
 }
+
