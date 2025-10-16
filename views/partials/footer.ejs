@@ -27,16 +27,17 @@
 <ul class="list-unstyled">
 <li class="mb-2"><a href="/partners" class="text-light text-decoration-none">Partenaires</a></li>
 <li class="mb-2"><a href="/challenges" class="text-light text-decoration-none">Défis</a></li>
-<li class="mb-2"><a href="/leaderboard" class="text-light text-decoration-none">Classement</a></li>
-<li class="mb-2"><a href="/contact" class="text-light text-decoration-none">Contact</a></li>
+<li class="mb-2"><a href="/leaderboard/parrainage" class="text-light text-decoration-none">Classement</a></li>
+<li class="mb-2"><a href="/investors/become-investor" class="text-light text-decoration-none">Devenir Investisseur</a></li>
+<li class="mb-2"><a href="/partners/become-partner" class="text-light text-decoration-none">Devenir Partenaire</a></li>
 </ul>
 </div>
 <div class="col-lg-3 mb-4">
 <h6 class="fw-bold mb-3">Contact</h6>
 <ul class="list-unstyled">
 <li class="mb-2"><i class="fas fa-map-marker-alt me-2 text-primary"></i>Cotonou, Bénin</li>
-<li class="mb-2"><i class="fas fa-phone me-2 text-primary"></i>+229 XX XX XX XX</li>
-<li class="mb-2"><i class="fas fa-envelope me-2 text-primary"></i>contact@cleantech.bj</li>
+<li class="mb-2"><i class="fas fa-phone me-2 text-primary"></i>+229 01 59 67 62 67</li>
+<li class="mb-2"><i class="fas fa-envelope me-2 text-primary"></i>liboriusfontaine@gmail.com</li>
 </ul>
 </div>
 </div>
@@ -44,7 +45,7 @@
 
 </div>
 <div class="copyright">
-      <p>&copy; <%= new Date().getFullYear() %> CleanTech. Tous droits réservés.</p>
+      <p>&copy; <%= new Date().getFullYear() %> CleanTech. Tous droits réservés.</p> Réaliser par liboriusDev
     </div>
 
     
@@ -54,27 +55,34 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 (function(){
-const p = new URLSearchParams(window.location.search);
-const s = p.get('success');
-const e = p.get('error');
-if (s) {
-Swal.fire({
-icon: 'success',
-title: 'Succès',
-text: s,
-confirmButtonColor: '#10b981',
-timer: 3000
-});
-}
-if (e) {
-Swal.fire({icon: 'error',
-title: 'Erreur',
-text: e,
-confirmButtonColor: '#ef4444'
-});
-}
+  const p = new URLSearchParams(window.location.search);
+  const s = p.get('success');
+  const e = p.get('error');
+
+  if (s) {
+    Swal.fire({
+      icon: 'success',
+      title: 'Succès',
+      text: s,
+      confirmButtonColor: '#10b981',
+    }).then(() => {
+      window.location.href = '/'; // Redirection vers la page d'accueil
+    });
+  }
+
+  if (e) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Erreur',
+      text: e,
+      confirmButtonColor: '#ef4444'
+    }).then(() => {
+      window.location.href = '/'; // Redirection vers la page d'accueil
+    });
+  }
 })();
 </script>
+
 </body>
 </html>
 

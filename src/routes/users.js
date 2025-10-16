@@ -3,9 +3,11 @@ import { authenticate } from '../utils/auth.js';
 
 export default async function (fastify) {
   fastify.get('/', async (req, reply) => {
-    const users = db.prepare('SELECT id,name,email,role,points FROM users ORDER BY id DESC').all();
-    return users;
-  });
+    authenticate(req, reply, ['admin']);
+  const users = db.prepare('SELECT id, name, email, role, points FROM users ORDER BY id DESC').all();
+  return reply.view('/pages/admin/user', { users , user: req.session.get('user') || null, ref: null    });
+});
+
 
   fastify.get('/dashboard', async (req, reply) => {
     authenticate(req, reply, ['user']);

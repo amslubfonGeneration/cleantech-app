@@ -26,20 +26,20 @@ export default async function (fastify) {
   fastify.get('/dashboard', async (req, reply) => {
       // Nombre de filleuls
       authenticate(req, reply, ['investor'])
-      const baseUrl = `${req.protocol}://${req.hostname}`;
-      console.log(req.session.get('user').id)
-      const referral_code = db.prepare('SELECT  referral_code FROM users WHERE id=?').get(req.session.get('user').id)?.referral_code || 0;
-    
-      const count = db.prepare(`
-        SELECT COUNT(*) AS c 
-        FROM referrals 
-        WHERE referrer_id=?`).get(req.session.get('user').id).c;
-      return reply.view('pages/dashboards/investor.ejs', {
-        user: req.session.get('user') || null,
-        ref: null,
-        referralsCount: count,
-        baseUrl,
-        referral_code
-      });
-    });
+      const userId = req.session.get('user').id;
+const user = db.prepare('SELECT * FROM users WHERE id = ?').get(userId);
+
+const baseUrl = `${req.protocol}://${req.hostname}`;
+const referral_code = user.referral_code || '';
+const referralsCount = db.prepare('SELECT COUNT(*) AS c FROM referrals WHERE referrer_id = ?').get(userId).c;
+
+return reply.view('pages/dashboards/investor.ejs', {
+  user,
+  ref: null,
+  referralsCount,
+  baseUrl,
+  referral_code
+});
+
+  });
 }

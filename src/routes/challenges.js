@@ -17,13 +17,39 @@ export default async function (fastify) {
 });
 
   fastify.get('/', async (req, reply) => {
+    let active = 0
+    if (!req.session.get('user')){
+    active = db.prepare(`
+    SELECT 
+      c.*,
+      COUNT(cp.user_id) AS participant_count
+    FROM challenges c
+    LEFT JOIN challenge_participants cp ON cp.challenge_id = c.id
+    GROUP BY c.id
+    ORDER BY c.start_date DESC
+  `).all();
+    }else{
   const now = Math.floor(Date.now() / 1000);
-  const active = db.prepare('SELECT * FROM challenges WHERE start_date <= ? AND end_date >= ?').all(now, now);
+  active = db.prepare(`
+    SELECT 
+      c.*,
+      COUNT(cp.user_id) AS participant_count,
+      EXISTS (
+        SELECT 1 FROM challenge_participants 
+        WHERE challenge_id = c.id AND user_id = ?
+      ) AS is_joined
+    FROM challenges c
+    LEFT JOIN challenge_participants cp ON cp.challenge_id = c.id
+    GROUP BY c.id
+    ORDER BY c.start_date DESC
+  `).all(req.session.get('user').id);
+}
+  console.log(active);
   return reply.view('pages/admin/challenges/list.ejs', { challenges: active, user: req.session.get('user') || null, ref: null  });
 });
 
 fastify.post('/:id/join', async (req, reply) => {
-  authenticate(req, reply, ['user', 'partener', 'investor', 'agent']);
+  authenticate(req, reply, ['user', 'partner', 'investor', 'agent']);
   const user = req.session.get('user');
   const challengeId = req.params.id;
 

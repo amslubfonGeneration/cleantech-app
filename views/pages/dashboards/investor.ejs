@@ -121,10 +121,17 @@ color: white;
 </a>
 </div>
 <div class="col-md-4 col-6">
-<a href="/subscribe" class="btn btn-outline-warning w-100 d-flex flex-column align-items-center py-3">
-<i class="fas fa-credit-card fa-2x mb-2"></i>
-<span>Abonnement</span>
-</a>
+<% if (user.subscription_status !== 'active') { %>
+  <a href="/subscribe" class="btn btn-outline-warning w-100 d-flex flex-column align-items-center py-3">
+    <i class="fas fa-credit-card fa-2x mb-2"></i>
+    <span>Abonnement</span>
+  </a>
+<% } else { %>
+  <button class="btn btn-success w-100 d-flex flex-column align-items-center py-3" disabled>
+    <i class="fas fa-check-circle fa-2x mb-2"></i>
+    <span>Déjà abonné</span>
+  </button>
+<% } %>
 </div>
 <div class="col-md-4 col-6">
 <a href="/leaderboard/parrainage" class="btn btn-outline-info w-100 d-flex flex-column align-items-center py-3">

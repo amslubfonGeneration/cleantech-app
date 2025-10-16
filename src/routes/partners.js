@@ -71,9 +71,26 @@ export default async function (fastify) {
 
     const baseUrl = `${req.protocol}://${req.hostname}`;
 
+    const subscription = db.prepare('SELECT subscribed_until, subscription_status FROM users WHERE id=?').get(userId);
 
     const redemptions = db.prepare('SELECT * FROM redemptions WHERE partner_id=? ORDER BY created_at DESC').all(req.session.get('user').id);
-    return reply.view('pages/dashboards/partner.ejs', { user, ref: new URLSearchParams(req.query).get('ref') || null, referral_code, deposits, points, referrals, baseUrl, userBadges, parrainCount, nextBadge, alreadyEarned, redemptions, subscribed_until: db.prepare('SELECT points FROM users WHERE id=?').get(userId)?.subscribed_until,subscription_status:db.prepare('SELECT points FROM users WHERE id=?').get(userId)?.subscription_status });
-});
+    return reply.view('pages/dashboards/partner.ejs', {
+      user,
+      ref: new URLSearchParams(req.query).get('ref') || null,
+      referral_code,
+      deposits,
+      points,
+      referrals,
+      baseUrl,
+      userBadges,
+      parrainCount,
+      nextBadge,
+      alreadyEarned,
+      redemptions,
+      subscribed_until: subscription?.subscribed_until,
+      subscription_status: subscription?.subscription_status
+    });
+
+  });
 
 }

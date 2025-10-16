@@ -127,9 +127,24 @@ color: white;
 <td>
 <% if (points >= r.points_required) { %><form method="post" action="/rewards/
 <%= r.id %>/redeem" class="d-inline">
-<button type="submit" class="btn btn-primary btn-sm">
-<i class="fas fa-exchange-alt me-1"></i>Réclamer
-</button>
+<td>
+<% if (r.already_redeemed) { %>
+  <button class="btn btn-outline-secondary btn-sm" disabled>
+    <i class="fas fa-check me-1"></i>Déjà réclamée
+  </button>
+<% } else if (points >= r.points_required) { %>
+  <form method="post" action="/rewards/<%= r.id %>/redeem" class="d-inline">
+    <button type="submit" class="btn btn-primary btn-sm">
+      <i class="fas fa-exchange-alt me-1"></i>Réclamer
+    </button>
+  </form>
+<% } else { %>
+  <button class="btn btn-outline-secondary btn-sm" disabled>
+    <i class="fas fa-lock me-1"></i>Verrouillé
+  </button>
+<% } %>
+</td>
+
 </form>
 <% } else { %>
 <button class="btn btn-outline-secondary btn-sm" disabled>
