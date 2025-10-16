@@ -11,7 +11,13 @@
         <li class="nav-item"><a class="nav-link" href="/#features">Avantages</a></li>
         <% if (user) { %>
         <% if(user.role === 'partner' || user.role === 'admin' || user.role === 'investor'){ %>
+        
           <li class="nav-item"><a class="nav-link" href="/stats">Statistiques</a></li>
+        <% } %>
+        <% if(user.role === 'admin'){ %>
+          <li class="nav-item"><a class="nav-link" href="/admin/blog">New blog</a></li>
+          <li class="nav-item"><a class="nav-link" href="/admin/badges/new">Nos badges</a></li>
+          <li class="nav-item"><a class="nav-link" href="/admin/badges/assign">assigner un Badge</a></li>
         <% } %>
         <% } %>
       </ul>
